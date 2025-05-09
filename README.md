@@ -14,6 +14,7 @@
 - 使用自定义 TypeHandler 处理特殊数据类型
 - 实现了完整的 CRUD 操作
 - 基于 Spring Boot 和 MyBatis Plus 构建
+- 提供 RESTful API 接口用于数据操作和测试
 
 ## 数据类型支持
 
@@ -39,13 +40,31 @@
 
 为了正确处理 PostgreSQL 特有的数据类型，项目实现了多个自定义 TypeHandler：
 
-- MoneyTypeHandler - 处理 PostgreSQL money 类型
-- DurationTypeHandler - 处理 interval 类型
+- MoneyTypeHandler - 处理 PostgreSQL money 类型，映射到 Java BigDecimal
 - MoodEnumTypeHandler - 处理自定义枚举类型
-- PGpointTypeHandler, PGlineTypeHandler, PGboxTypeHandler, PGcircleTypeHandler - 处理几何类型
-- UUIDTypeHandler - 处理 UUID 类型
-- JsonNodeTypeHandler - 处理 JSONB 类型
-- IntegerArrayTypeHandler, StringArrayTypeHandler - 处理数组类型
+- 几何类型处理器:
+  - PGpointTypeHandler - 处理点类型
+  - PGlineTypeHandler - 处理线类型
+  - PGboxTypeHandler - 处理矩形类型
+  - PGcircleTypeHandler - 处理圆类型
+- 网络地址类型处理器:
+  - InetTypeHandler - 处理 inet 类型
+  - CidrTypeHandler - 处理 cidr 类型
+  - MacaddrTypeHandler - 处理 macaddr 类型
+- JSON 相关处理器:
+  - JsonTypeHandler - 处理基本 JSON 类型
+  - JsonNodeTypeHandler - 处理 JSONB 类型，映射到 Jackson JsonNode
+  - GenericJsonTypeHandler - 通用 JSON 处理器，支持自定义类型映射
+- 数组类型处理器:
+  - IntegerArrayTypeHandler - 处理整数数组
+  - StringArrayTypeHandler - 处理字符串数组
+- 范围类型处理器:
+  - IntRangeTypeHandler - 处理整数范围
+  - TimestampRangeTypeHandler - 处理时间戳范围
+- 其他特殊类型:
+  - XmlTypeHandler - 处理 XML 类型
+  - TsvectorTypeHandler - 处理全文搜索向量
+  - AddressTypeHandler - 处理自定义复合地址类型
 
 ## 技术栈
 
@@ -73,6 +92,10 @@
 - GET `/api/pg-type-demo/mybatis/{id}` - 根据 ID 查询记录
 - GET `/api/pg-type-demo/mybatis` - 查询所有记录
 - DELETE `/api/pg-type-demo/mybatis/{id}` - 删除记录
+- PUT /api/pg-type-demo/mybatis/{id} - 更新记录
+- GET /api/pg-type-demo/mybatis/page - 分页查询记录，支持参数：
+    - page - 页码，默认为1
+    - size - 每页大小，默认为10
 
 ## 参考文档
 
