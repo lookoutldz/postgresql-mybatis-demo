@@ -1,0 +1,20 @@
+server:
+  port: 8071
+spring:
+  application:
+    name: postgresql-mybatis-demo
+
+  # 移除JPA配置
+
+  # 数据源配置 (用于MyBatis)
+  datasource:
+    url: jdbc:postgresql://192.168.50.173:5432/test
+    username: postgres
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-handlers-package: com.looko.postgresqlmybatisdemo.config.typehandler
+  configuration:
+    map-underscore-to-camel-case: true

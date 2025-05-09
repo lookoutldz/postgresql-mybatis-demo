@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.looko.postgresqlmybatisdemo.repository.mybatis.PgTypeDemoMapper">
+    
+    <!-- 在 resultMap 中添加 xml_value 的 TypeHandler -->
+    <resultMap id="pgTypeDemoResultMap" type="com.looko.postgresqlmybatisdemo.entity.PgTypeDemo">
+        <id property="id" column="id"/>
+        <result property="intValue" column="int_value"/>
+        <result property="smallintValue" column="smallint_value"/>
+        <result property="bigintValue" column="bigint_value"/>
+        <result property="decimalValue" column="decimal_value"/>
+        <result property="numericValue" column="numeric_value"/>
+        <result property="realValue" column="real_value"/>
+        <result property="doubleValue" column="double_value"/>
+        <result property="moneyValue" column="money_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.MoneyTypeHandler"/>
+        <result property="charValue" column="char_value"/>
+        <result property="varcharValue" column="varchar_value"/>
+        <result property="textValue" column="text_value"/>
+        <result property="dateValue" column="date_value"/>
+        <result property="timeValue" column="time_value"/>
+        <result property="timestampValue" column="timestamp_value"/>
+        <result property="timestamptzValue" column="timestamptz_value"/>
+        <result property="intervalValue" column="interval_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.DurationTypeHandler"/>
+        <result property="booleanValue" column="boolean_value"/>
+        <result property="moodValue" column="mood_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.MoodEnumTypeHandler"/>
+        <result property="pointValue" column="point_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.PGpointTypeHandler"/>
+        <result property="lineValue" column="line_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.PGlineTypeHandler"/>
+        <result property="boxValue" column="box_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.PGboxTypeHandler"/>
+        <result property="circleValue" column="circle_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.PGcircleTypeHandler"/>
+        <result property="inetValue" column="inet_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.InetTypeHandler"/>
+        <result property="cidrValue" column="cidr_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.CidrTypeHandler"/>
+        <result property="macaddrValue" column="macaddr_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.MacaddrTypeHandler"/>
+        <result property="tsvectorValue" column="tsvector_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.TsvectorTypeHandler"/>
+        <result property="xmlValue" column="xml_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.XmlTypeHandler"/>
+        <result property="uuidValue" column="uuid_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.UUIDTypeHandler"/>
+        <result property="jsonValue" column="json_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.JsonTypeHandler"/>
+        <result property="jsonbValue" column="jsonb_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.JsonNodeTypeHandler"/>
+        <result property="intArray" column="int_array" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.IntegerArrayTypeHandler"/>
+        <result property="textArray" column="text_array" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.StringArrayTypeHandler"/>
+        <result property="intRange" column="int_range" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.IntRangeTypeHandler"/>
+        <result property="timestampRange" column="timestamp_range" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.TimestampRangeTypeHandler"/>
+        <result property="oidValue" column="oid_value"/>
+        <result property="addressValue" column="address_value" typeHandler="com.looko.postgresqlmybatisdemo.config.typehandler.AddressTypeHandler"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+    
+    <!-- 在 insert 语句中添加 jsonValue 的 TypeHandler -->
+    <insert id="insert" parameterType="com.looko.postgresqlmybatisdemo.entity.PgTypeDemo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO pg_type_demo (
+            int_value, smallint_value, bigint_value, decimal_value, numeric_value, real_value, double_value,
+            money_value, char_value, varchar_value, text_value, date_value, time_value, timestamp_value,
+            timestamptz_value, interval_value, boolean_value, mood_value, point_value, line_value, box_value,
+            circle_value, inet_value, cidr_value, macaddr_value, tsvector_value, xml_value, uuid_value,
+            json_value, jsonb_value, int_array, text_array, int_range, timestamp_range, oid_value, address_value
+        ) VALUES (
+            #{intValue}, #{smallintValue}, #{bigintValue}, #{decimalValue}, #{numericValue}, #{realValue}, #{doubleValue},
+            #{moneyValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.MoneyTypeHandler}, #{charValue}, #{varcharValue}, #{textValue}, #{dateValue}, #{timeValue}, #{timestampValue},
+            #{timestamptzValue}, #{intervalValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.DurationTypeHandler}, 
+            #{booleanValue}, #{moodValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.MoodEnumTypeHandler}, 
+            #{pointValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.PGpointTypeHandler}, 
+            #{lineValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.PGlineTypeHandler}, 
+            #{boxValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.PGboxTypeHandler},
+            #{circleValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.PGcircleTypeHandler}, 
+            #{inetValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.InetTypeHandler}, 
+            #{cidrValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.CidrTypeHandler}, 
+            #{macaddrValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.MacaddrTypeHandler},
+            #{tsvectorValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.TsvectorTypeHandler}, 
+            #{xmlValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.XmlTypeHandler}, 
+            #{uuidValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.UUIDTypeHandler},
+            #{jsonValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.JsonTypeHandler}, 
+            #{jsonbValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.JsonNodeTypeHandler}, 
+            #{intArray,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.IntegerArrayTypeHandler,jdbcType=OTHER}, 
+            #{textArray,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.StringArrayTypeHandler,jdbcType=OTHER}, 
+            #{intRange,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.IntRangeTypeHandler}, 
+            #{timestampRange,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.TimestampRangeTypeHandler}, 
+            #{oidValue}, #{addressValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.AddressTypeHandler}
+        )
+    </insert>
+    
+    <select id="findById" resultMap="pgTypeDemoResultMap">
+        SELECT * FROM pg_type_demo WHERE id = #{id}
+    </select>
+    
+    <select id="findAll" resultMap="pgTypeDemoResultMap">
+        SELECT * FROM pg_type_demo
+    </select>
+    
+    <select id="findByVarcharValue" resultMap="pgTypeDemoResultMap">
+        SELECT * FROM pg_type_demo WHERE varchar_value LIKE CONCAT('%', #{value}, '%')
+    </select>
+    
+    <!-- 在 update 语句中添加 xml_value 的 TypeHandler -->
+    <update id="update" parameterType="com.looko.postgresqlmybatisdemo.entity.PgTypeDemo">
+        UPDATE pg_type_demo SET
+            int_value = #{intValue},
+            smallint_value = #{smallintValue},
+            bigint_value = #{bigintValue},
+            decimal_value = #{decimalValue},
+            numeric_value = #{numericValue},
+            real_value = #{realValue},
+            double_value = #{doubleValue},
+            money_value = #{moneyValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.MoneyTypeHandler},
+            char_value = #{charValue},
+            varchar_value = #{varcharValue},
+            text_value = #{textValue},
+            date_value = #{dateValue},
+            time_value = #{timeValue},
+            timestamp_value = #{timestampValue},
+            timestamptz_value = #{timestamptzValue},
+            interval_value = #{intervalValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.DurationTypeHandler},
+            boolean_value = #{booleanValue},
+            mood_value = #{moodValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.MoodEnumTypeHandler},
+            point_value = #{pointValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.PGpointTypeHandler},
+            line_value = #{lineValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.PGlineTypeHandler},
+            box_value = #{boxValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.PGboxTypeHandler},
+            circle_value = #{circleValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.PGcircleTypeHandler},
+            inet_value = #{inetValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.InetTypeHandler},
+            cidr_value = #{cidrValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.CidrTypeHandler},
+            macaddr_value = #{macaddrValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.MacaddrTypeHandler},
+            tsvector_value = #{tsvectorValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.TsvectorTypeHandler},
+            xml_value = #{xmlValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.XmlTypeHandler},
+            uuid_value = #{uuidValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.UUIDTypeHandler},
+            json_value = #{jsonValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.JsonTypeHandler},
+            jsonb_value = #{jsonbValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.JsonNodeTypeHandler},
+            int_array = #{intArray,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.IntegerArrayTypeHandler,jdbcType=OTHER},
+            text_array = #{textArray,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.StringArrayTypeHandler,jdbcType=OTHER},
+            int_range = #{intRange,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.IntRangeTypeHandler},
+            timestamp_range = #{timestampRange,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.TimestampRangeTypeHandler},
+            oid_value = #{oidValue},
+            address_value = #{addressValue,typeHandler=com.looko.postgresqlmybatisdemo.config.typehandler.AddressTypeHandler},
+            updated_at = CURRENT_TIMESTAMP
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="deleteById">
+        DELETE FROM pg_type_demo WHERE id = #{id}
+    </delete>
+    
+    <select id="findByPage" resultMap="pgTypeDemoResultMap">
+        SELECT * FROM pg_type_demo ORDER BY id LIMIT #{limit} OFFSET #{offset}
+    </select>
+    
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM pg_type_demo
+    </select>
+</mapper>
